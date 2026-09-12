@@ -31,6 +31,7 @@ class CodexHarness < Formula
         #!/bin/sh
         exec "#{Formula["python@3.14"].opt_bin}/python3.14" "#{libexec}/#{script}" "$@"
       SH
+      (bin/name).chmod 0755
     end
   end
 
