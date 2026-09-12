@@ -1,0 +1,43 @@
+name: Verify published installation
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  installer:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install without credentials or Go
+        shell: bash
+        run: |
+          python3 install.py --codex-home "$RUNNER_TEMP/profile" --runtime-home "$RUNNER_TEMP/runtime"
+          python3 install.py --codex-home "$RUNNER_TEMP/profile" --runtime-home "$RUNNER_TEMP/runtime"
+          "$RUNNER_TEMP/runtime/bin/harness" session --cwd "$GITHUB_WORKSPACE" --format json > "$RUNNER_TEMP/session.json"
+          python3 -c 'import json,os; assert json.load(open(os.environ["RUNNER_TEMP"]+"/session.json"))["policy_revision"] == "usage-aware-2026-09-12"'
+      - name: Check hook notice and launcher deduplication
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          command = ['python3', os.environ['RUNNER_TEMP'] + '/runtime/codex-session-hook.py']
+          payload = json.dumps({'cwd': os.environ['GITHUB_WORKSPACE']})
+          shown = json.loads(subprocess.check_output(command, input=payload, text=True))
+          assert 'systemMessage' in shown
+          env = dict(os.environ, CODEX_HARNESS_STARTUP_NOTICE_SHOWN='1')
+          hidden = json.loads(subprocess.check_output(command, input=payload, text=True, env=env))
+          assert 'systemMessage' not in hidden
+          assert 'Do not repeat it in the first assistant response' in hidden['hookSpecificOutput']['additionalContext']
+          PY
+  homebrew:
+    runs-on: macos-latest
+    steps:
+      - name: Install and test the public tap
+        run: |
+          brew install okeyeat/codex-harness/codex-harness
+          brew test okeyeat/codex-harness/codex-harness
