@@ -19,7 +19,7 @@ jobs:
           python3 install.py --codex-home "$RUNNER_TEMP/profile" --runtime-home "$RUNNER_TEMP/runtime"
           python3 install.py --codex-home "$RUNNER_TEMP/profile" --runtime-home "$RUNNER_TEMP/runtime"
           "$RUNNER_TEMP/runtime/bin/harness" session --cwd "$GITHUB_WORKSPACE" --format json > "$RUNNER_TEMP/session.json"
-          python3 -c 'import json,os; assert json.load(open(os.environ["RUNNER_TEMP"]+"/session.json"))["policy_revision"] == "usage-aware-2026-09-12"'
+          python3 -c 'import json,os; assert json.load(open(os.environ["RUNNER_TEMP"]+"/session.json"))["policy_revision"] == "role-routing-2026-09-13"'
       - name: Check hook notice and launcher deduplication
         shell: bash
         run: |

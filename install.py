@@ -15,8 +15,8 @@ import tarfile
 import tempfile
 import urllib.request
 
-VERSION = '0.2.0'
-ASSETS = {'darwin-arm64': {'name': 'codex-harness-0.2.0-darwin-arm64.tar.gz', 'sha256': 'e68a8e2dbcd2a6f021e5a170288fafc12b6fbc68834e2a8c4934af24db211ee2'}, 'darwin-amd64': {'name': 'codex-harness-0.2.0-darwin-amd64.tar.gz', 'sha256': 'a17efd6f33f26d21532bed29708d76f728a66085eef41f3284a343db62323185'}, 'linux-arm64': {'name': 'codex-harness-0.2.0-linux-arm64.tar.gz', 'sha256': 'b894fe9c33e5a14dc74f1764ddfe7a4edc613532ee64cc061b42c55b62c37ed3'}, 'linux-amd64': {'name': 'codex-harness-0.2.0-linux-amd64.tar.gz', 'sha256': '2c3a1af865c0f3e3a9f7caaa28f7ebae3dfdfec3ee4eadcc025dde30de586d83'}}
+VERSION = '0.3.0'
+ASSETS = {'darwin-arm64': {'name': 'codex-harness-0.3.0-darwin-arm64.tar.gz', 'sha256': 'f08051ff8b21fda45bc811049cfdc10ab5ebfbc1a3715d380a6fb7735fa29d15'}, 'darwin-amd64': {'name': 'codex-harness-0.3.0-darwin-amd64.tar.gz', 'sha256': 'c7e3b0f3d67af29b339542c0745e52baba815f4a714f7f13fb23a864761e88de'}, 'linux-arm64': {'name': 'codex-harness-0.3.0-linux-arm64.tar.gz', 'sha256': '342905a16f3b7cf6f7dc91e8660be453a365b800b449637dffd74582fb192888'}, 'linux-amd64': {'name': 'codex-harness-0.3.0-linux-amd64.tar.gz', 'sha256': 'd2c8c86ac2a53d9317eea8b40b364567c037393de19bcfc20035880ed8cf44cd'}}
 BASE_URL = 'https://github.com/okeyeat/homebrew-codex-harness/releases/download'
 
 
