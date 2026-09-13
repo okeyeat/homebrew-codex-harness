@@ -1,26 +1,26 @@
 class CodexHarness < Formula
   desc "Shared session policy and startup guide for Codex"
   homepage "https://github.com/okeyeat/homebrew-codex-harness"
-  version "0.3.0"
+  version "0.4.0"
   depends_on "python@3.14"
   on_macos do
     on_arm do
-      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.3.0/codex-harness-0.3.0-darwin-arm64.tar.gz"
-      sha256 "f08051ff8b21fda45bc811049cfdc10ab5ebfbc1a3715d380a6fb7735fa29d15"
+      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.4.0/codex-harness-0.4.0-darwin-arm64.tar.gz"
+      sha256 "00977831373b4b86d908c6c82c5b6044e8c083496bd0370e6791a2950b378105"
     end
     on_intel do
-      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.3.0/codex-harness-0.3.0-darwin-amd64.tar.gz"
-      sha256 "c7e3b0f3d67af29b339542c0745e52baba815f4a714f7f13fb23a864761e88de"
+      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.4.0/codex-harness-0.4.0-darwin-amd64.tar.gz"
+      sha256 "145f296483b8ac75013b31b757fc8469c9a45c3dda5550040067cadfed1755a3"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.3.0/codex-harness-0.3.0-linux-arm64.tar.gz"
-      sha256 "342905a16f3b7cf6f7dc91e8660be453a365b800b449637dffd74582fb192888"
+      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.4.0/codex-harness-0.4.0-linux-arm64.tar.gz"
+      sha256 "794a192efe2c45f97b9b0684b1c64fb3839fd65d22b63c6990024e1b5c4cf938"
     end
     on_intel do
-      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.3.0/codex-harness-0.3.0-linux-amd64.tar.gz"
-      sha256 "d2c8c86ac2a53d9317eea8b40b364567c037393de19bcfc20035880ed8cf44cd"
+      url "https://github.com/okeyeat/homebrew-codex-harness/releases/download/v0.4.0/codex-harness-0.4.0-linux-amd64.tar.gz"
+      sha256 "4001800d3717c6f0bd3dfe349db96f42ae6fe9af9676d1bb56534dc94c328781"
     end
   end
   def install
@@ -46,7 +46,7 @@ class CodexHarness < Formula
   end
 
   test do
-    assert_match "role-routing-2026-09-13", shell_output("#{bin}/harness session --cwd #{testpath} --format json")
+    assert_match "direct-session-2026-09-13", shell_output("#{bin}/harness session --cwd #{testpath} --format json")
     system bin/"codex-harness-setup", "--codex-home", testpath/"profile", "--runtime-home", testpath/"state/runtime"
     assert_path_exists testpath/"state/runtime/POLICY.md"
     assert_path_exists testpath/"profile/hooks.json"
